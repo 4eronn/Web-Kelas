@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class of HKI 2022 — Hukum Keluarga Islam</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo_masjid.png" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brandRed: {
+              400: '#f87171',
+              500: '#ef4444',
+              600: '#dc2626',
+              700: '#b91c1c',
+              800: '#991b1b',
+              900: '#7f1d1d'
+            },
+            brandDark: {
+              800: '#18181b',
+              900: '#121215',
+              950: '#09090b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-brandDark-950 text-slate-100 min-h-screen relative flex flex-col selection:bg-brandRed-600 selection:text-white">
+
+  <!-- 15-SECOND SPLASH SCREEN ANIMATION OVERLAY -->
+  <div id="loadingOverlay" class="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center p-6 text-center select-none">
+    <div class="max-w-md w-full flex flex-col items-center">
+      
+      <!-- Law & Masjid Emblem -->
+      <div class="relative w-24 h-24 mb-6 flex items-center justify-center">
+        <div class="loading-spinner-glow w-20 h-20 rounded-2xl bg-zinc-900 border-2 border-red-600/60 p-2 flex items-center justify-center shadow-2xl shadow-red-600/50">
+          <img src="assets/logo_masjid.png" alt="Logo HKI" class="w-full h-full object-contain" />
+        </div>
+        <div class="absolute -top-2 -right-2 text-white bg-zinc-900 p-1.5 rounded-full border border-red-600">
+          <i data-lucide="scale" class="w-4 h-4 text-red-500"></i>
+        </div>
+      </div>
+
+      <h2 class="font-serif-title font-bold text-2xl text-white tracking-wide mb-1">
+        CLASS OF HKI 2022
+      </h2>
+      <p class="text-xs text-rose-400 uppercase tracking-widest font-semibold mb-6">
+        Fakultas Hukum • Hukum Keluarga Islam
+      </p>
+
+      <!-- Dynamic Loading Status Quote -->
+      <p id="loadingQuote" class="text-xs text-slate-300 italic min-h-[36px] mb-6 px-4">
+        Memuat Berkas Kenangan Hukum Keluarga Islam...
+      </p>
+
+      <!-- 15s Progress Bar -->
+      <div class="w-full bg-zinc-800 rounded-full h-2.5 overflow-hidden p-0.5 border border-zinc-700 mb-3 shadow-inner">
+        <div id="loadProgressBar" class="h-full rounded-full bg-gradient-to-r from-red-700 via-red-500 to-rose-400 w-0 transition-all duration-100 ease-linear shadow-lg shadow-red-500/50"></div>
+      </div>
+
+      <div class="flex items-center justify-between w-full text-[11px] text-slate-400 font-mono mb-8">
+        <span>Menyiapkan Galeri...</span>
+        <span id="loadPercent" class="text-red-400 font-bold">0%</span>
+      </div>
+
+      <!-- Skip Button -->
+      <button onclick="skipLoading()" class="px-5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-slate-300 hover:text-white border border-zinc-700 text-xs font-semibold flex items-center gap-1.5 transition-all">
+        <span>Lewati Loading</span>
+        <i data-lucide="fast-forward" class="w-3.5 h-3.5 text-red-500"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Background Ambient Red Glows -->
+  <div class="fixed top-0 left-1/4 w-96 h-96 bg-red-600/10 rounded-full filter blur-[140px] pointer-events-none"></div>
+  <div class="fixed bottom-10 right-10 w-96 h-96 bg-rose-600/10 rounded-full filter blur-[140px] pointer-events-none"></div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <img src="assets/logo_masjid.png" alt="Logo HKI" class="w-11 h-11 object-contain rounded-xl bg-zinc-900 border border-red-600/40 p-1 group-hover:scale-105 transition-transform shadow-lg shadow-red-600/20" />
+        <div>
+          <span class="font-serif-title font-bold text-lg sm:text-xl text-gradient bg-gradient-to-r from-white via-slate-100 to-red-400 bg-clip-text text-transparent">
+            CLASS OF HKI
+          </span>
+          <span class="block text-[10px] tracking-widest text-rose-300 uppercase font-semibold">Hukum Keluarga Islam</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+        <a href="#gallery" class="hover:text-red-400 transition-colors flex items-center gap-1.5">
+          <i data-lucide="image" class="w-4 h-4 text-red-500"></i> Galeri Kenangan
+        </a>
+        <a href="#members" class="hover:text-red-400 transition-colors flex items-center gap-1.5">
+          <i data-lucide="users" class="w-4 h-4 text-red-500"></i> Anggota Kelas
+        </a>
+        <a href="#timeline" class="hover:text-red-400 transition-colors flex items-center gap-1.5">
+          <i data-lucide="milestone" class="w-4 h-4 text-red-500"></i> Perjalanan
+        </a>
+        <a href="#memoryWall" class="hover:text-red-400 transition-colors flex items-center gap-1.5">
+          <i data-lucide="sticky-note" class="w-4 h-4 text-red-500"></i> Pesan & Kesan
+        </a>
+      </nav>
+
+      <!-- User Auth Status -->
+      <div class="flex items-center space-x-3">
+
+        <!-- Dynamic User Auth Nav Container -->
+        <div id="userNavContainer" class="flex items-center gap-2">
+          <!-- Rendered by JS: Login Button OR User Profile Menu -->
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-300 hover:text-red-400">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-zinc-800 bg-black/95 backdrop-blur-xl px-4 py-4 space-y-3">
+      <a href="#gallery" class="mobile-nav-link block py-2 text-sm text-slate-200 hover:text-red-400">📸 Galeri Kenangan</a>
+      <a href="#members" class="mobile-nav-link block py-2 text-sm text-slate-200 hover:text-red-400">👨‍⚖️ Anggota Kelas HKI</a>
+      <a href="#timeline" class="mobile-nav-link block py-2 text-sm text-slate-200 hover:text-red-400">📜 Garis Waktu Perjalanan</a>
+      <a href="#memoryWall" class="mobile-nav-link block py-2 text-sm text-slate-200 hover:text-red-400">✍️ Pesan & Kesan</a>
+      <div id="mobileAuthContainer" class="pt-2 border-t border-zinc-800">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </header>
+
+  <!-- LAW QUOTES TICKER -->
+  <section class="ticker-wrap py-2.5">
+    <div class="ticker-content flex items-center space-x-12 text-xs font-mono text-rose-300">
+      <div id="tickerItems" class="flex items-center space-x-12">
+        <!-- Will be populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+    
+    <!-- Subtitle Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-600/40 bg-red-600/10 text-red-400 text-xs font-semibold uppercase tracking-widest mb-6 shadow-sm">
+      <i data-lucide="scale" class="w-3.5 h-3.5 text-red-500"></i>
+      <span>FAKULTAS HUKUM • CLASS OF HKI 2022</span>
+    </div>
+
+    <!-- Main Title -->
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif-title font-extrabold text-white tracking-tight mb-6 leading-tight">
+      Galeri Kenangan <br class="hidden sm:inline" />
+      <span class="bg-gradient-to-r from-red-500 via-rose-300 to-white bg-clip-text text-transparent text-glow-red">
+        Hukum Keluarga Islam
+      </span>
+    </h1>
+
+    <!-- Class Motto / Quote -->
+    <p class="max-w-3xl mx-auto text-slate-300 text-base sm:text-lg italic mb-10 leading-relaxed">
+      "Fiat Justitia Ruat Caelum — Hendaklah keadilan ditegakkan walaupun langit akan runtuh. 
+      Mengukir jejak sejarah dan menjaga kebersamaan abadi keluarga HKI 2022."
+    </p>
+
+    <!-- Hero Stats Counter -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-red-600">
+        <span id="statStudents" class="block text-3xl font-bold font-serif-title text-red-500">38</span>
+        <span class="text-xs text-slate-400 uppercase tracking-wider">Mahasiswa HKI</span>
+      </div>
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-red-600">
+        <span id="statMemories" class="block text-3xl font-bold font-serif-title text-red-500">142+</span>
+        <span class="text-xs text-slate-400 uppercase tracking-wider">Kenangan Kelas</span>
+      </div>
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-red-600">
+        <span id="statSks" class="block text-3xl font-bold font-serif-title text-red-500">144</span>
+        <span class="text-xs text-slate-400 uppercase tracking-wider">SKS Tuntas</span>
+      </div>
+      <div class="glass-card p-4 rounded-2xl border-t-2 border-red-600">
+        <span id="statYears" class="block text-3xl font-bold font-serif-title text-red-500">4 Tahun</span>
+        <span class="text-xs text-slate-400 uppercase tracking-wider">Kisah Bersama</span>
+      </div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#gallery" class="btn-red px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="image" class="w-5 h-5"></i> Lihat Galeri Foto/Video
+      </a>
+      <button onclick="checkAuthAndOpenUpload()" class="px-8 py-3.5 rounded-xl font-bold text-sm bg-zinc-900 hover:bg-zinc-800 text-white border border-red-600/50 transition-all flex items-center gap-2">
+        <i data-lucide="upload" class="w-5 h-5 text-red-500"></i> Unggah Momen Baru
+      </button>
+      <button onclick="triggerConfetti()" class="px-5 py-3.5 rounded-xl font-bold text-sm bg-zinc-900/80 hover:bg-zinc-800 text-slate-200 border border-zinc-700 transition-all flex items-center gap-2" title="Rayakan Momen Kelulusan!">
+        <i data-lucide="party-popper" class="w-5 h-5 text-red-500"></i> Selebrasi 🎉
+      </button>
+    </div>
+  </section>
+
+  <!-- MAIN GALLERY SECTION (LOCKED FOR GUESTS / UNLOCKED FOR LOGGED-IN USERS) -->
+  <section id="gallery" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-zinc-800 gap-6">
+      <div>
+        <div class="flex items-center gap-2 text-red-500 text-xs font-semibold uppercase tracking-wider mb-2">
+          <i data-lucide="camera" class="w-4 h-4"></i> Momen Abadi Kelas
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif-title font-bold text-white">Galeri Kenang-Kenangan</h2>
+      </div>
+
+      <!-- Controls: Search & Upload -->
+      <div id="galleryControls" class="flex flex-wrap items-center gap-3">
+        <!-- Search Box -->
+        <div class="relative flex-1 sm:w-64">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input type="text" id="gallerySearch" placeholder="Cari momen / judul..." class="w-full bg-zinc-900 border border-zinc-800 focus:border-red-600 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 outline-none transition-all" />
+        </div>
+        <!-- Upload Button -->
+        <button onclick="checkAuthAndOpenUpload()" class="btn-red px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="plus" class="w-4 h-4"></i> Tambah
+        </button>
+      </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-10 scrollbar-none" id="categoryTabs">
+      <!-- Will be rendered by JS -->
+    </div>
+
+    <!-- LOCKED BANNER (Shown to Non-Logged In Users / Orang Awam) -->
+    <div id="galleryLockedBanner" class="hidden text-center py-20 px-6 bg-zinc-900/90 rounded-3xl border-2 border-red-600/40 shadow-2xl relative overflow-hidden">
+      <div class="w-20 h-20 rounded-full bg-red-600/20 text-red-500 border border-red-600/50 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-red-600/30">
+        <i data-lucide="lock" class="w-10 h-10 stroke-[2.5]"></i>
+      </div>
+      <h3 class="text-2xl font-serif-title font-bold text-white mb-3">
+        Galeri Kenangan Terkunci
+      </h3>
+      <p class="text-sm text-slate-300 max-w-xl mx-auto mb-8 leading-relaxed">
+        Mohon maaf, galeri foto & video kenangan kelas ini khusus diperuntukkan bagi anggota terdaftar <strong class="text-white">Class of HKI 2022</strong>. Pengunjung selain anggota dapat menikmati profil & perjalanan kelas kami
+      </p>
+      <button onclick="openModal('loginModal')" class="btn-red px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-wider inline-flex items-center gap-2 shadow-xl">
+        <i data-lucide="key-round" class="w-5 h-5"></i> Login Akun HKI Sekarang
+      </button>
+    </div>
+
+    <!-- Gallery Grid (Polaroid Style Merah-Putih-Hitam) -->
+    <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <!-- Gallery Cards will be injected by JS -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="galleryEmpty" class="hidden text-center py-20 bg-zinc-900/50 rounded-3xl border border-zinc-800">
+      <i data-lucide="image-off" class="w-12 h-12 text-slate-600 mx-auto mb-4"></i>
+      <h3 class="text-lg font-bold text-slate-300 mb-1">Tidak Ada Kenangan Ditemukan</h3>
+      <p class="text-xs text-slate-500 mb-6">Coba cari dengan kata kunci lain atau pilih kategori yang berbeda.</p>
+      <button onclick="resetGalleryFilter()" class="btn-red px-4 py-2 rounded-xl text-xs">Tampilkan Semua Kenangan</button>
+    </div>
+  </section>
+
+  <!-- CLASS MEMBERS SECTION -->
+  <section id="members" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/10 border border-red-600/30 text-red-400 text-xs font-semibold uppercase tracking-wider mb-3">
+        <i data-lucide="users" class="w-3.5 h-3.5"></i>
+        <span>Keluarga Besar HKI</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-serif-title font-bold text-white mb-4">Struktur & Anggota Kelas</h2>
+      <p class="text-slate-400 text-sm">Dosen pembimbing, pengurus kelas, dan seluruh mahasiswa Hukum Keluarga Islam 2022.</p>
+    </div>
+
+    <!-- Members Search & Filter -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+      <div class="flex items-center space-x-2 bg-zinc-900/90 p-1 rounded-xl border border-zinc-800" id="memberRoleFilters">
+        <button onclick="filterMembers('all')" class="member-role-btn px-4 py-1.5 rounded-lg text-xs font-semibold transition-all bg-red-600 text-white">Semua</button>
+        <button onclick="filterMembers('Dosen PA')" class="member-role-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Dosen</button>
+        <button onclick="filterMembers('Pengurus')" class="member-role-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Pengurus</button>
+        <button onclick="filterMembers('Anggota')" class="member-role-btn px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Anggota</button>
+      </div>
+
+      <div class="relative w-full sm:w-64">
+        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+        <input type="text" id="memberSearch" placeholder="Cari nama anggota..." class="w-full bg-zinc-900 border border-zinc-800 focus:border-red-600 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder-slate-500 outline-none" />
+      </div>
+    </div>
+
+    <!-- Members Grid -->
+    <div id="membersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- CLASS TIMELINE SECTION -->
+  <section id="timeline" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full border-t border-zinc-800">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/10 border border-red-600/30 text-red-400 text-xs font-semibold uppercase tracking-wider mb-3">
+        <i data-lucide="milestone" class="w-3.5 h-3.5"></i>
+        <span>Garis Waktu HKI 2022</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-serif-title font-bold text-white mb-4">Perjalanan Kebersamaan Kami</h2>
+      <p class="text-slate-400 text-sm">Dari masa penerimaan mahasiswa baru, perkuliahan, praktikum sidang, hingga wisuda.</p>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Vertical Line -->
+      <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-600 via-rose-500 to-zinc-800 hidden md:block"></div>
+
+      <div id="timelineList" class="space-y-12">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORY WALL SECTION (STICKY NOTES) -->
+  <section id="memoryWall" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/10 border border-red-600/30 text-red-400 text-xs font-semibold uppercase tracking-wider mb-3">
+          <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+          <span>Buku Kesan Pesan</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-serif-title font-bold text-white mb-2">Papan Pesan & Kesan Kelas</h2>
+        <p class="text-slate-400 text-sm">Tinggalkan pesan, doa, cerita rahasia, atau ucapan rindu untuk teman seangkatan.</p>
+      </div>
+
+      <button onclick="checkAuthAndOpenNoteModal()" class="btn-red px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-2 shrink-0">
+        <i data-lucide="pen-tool" class="w-4 h-4"></i> Tulis Pesan Baru
+      </button>
+    </div>
+
+    <!-- Notes Grid (VISIBLE TO EVERYONE) -->
+    <div id="notesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto border-t border-zinc-800 bg-black py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center space-x-3">
+        <img src="assets/logo_masjid.png" alt="Logo HKI" class="w-9 h-9 object-contain rounded-lg bg-zinc-900 border border-red-600/40 p-0.5" />
+        <div>
+          <h4 class="font-serif-title font-bold text-slate-200 text-sm">Class of HKI 2022</h4>
+          <p class="text-xs text-slate-500">Hukum Keluarga Islam • Fakultas Hukum & Syariah</p>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-500 text-center">
+        &copy; 2026 HKI Memories. Dibuat dengan penuh kenangan untuk keluarga besar Hukum Keluarga Islam.
+      </p>
+
+      <div class="flex items-center space-x-4">
+        <button onclick="openModal('quizModal')" class="text-xs text-red-400 hover:underline flex items-center gap-1">
+          <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> Mini Quiz HKI
+        </button>
+        <a href="#" class="text-xs text-slate-400 hover:text-red-400 flex items-center gap-1">
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i> Kembali Ke Atas
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative bg-zinc-900 border border-red-600/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl my-auto">
+      <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 text-slate-400 hover:text-white flex items-center justify-center">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-red-600/20 text-red-500 border border-red-600/40 flex items-center justify-center mx-auto mb-3 shadow-lg">
+          <i data-lucide="key-round" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-serif-title font-bold text-white">Login Akun HKI</h3>
+        <p class="text-xs text-slate-400 mt-1">Silakan ketik username & password Anda secara manual</p>
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Username (user1 - user18) *</label>
+          <input type="text" id="loginUsername" required placeholder="Ketik username (contoh: user1)" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Password *</label>
+          <input type="password" id="loginPassword" required placeholder="Ketik password Anda" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <p id="loginError" class="text-xs font-bold text-red-400 hidden"></p>
+
+        <button type="submit" class="w-full btn-red py-3 rounded-xl text-xs uppercase tracking-wider font-bold shadow-lg">Masuk Ke Galeri Kenangan</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CHANGE PASSWORD MODAL -->
+  <div id="changePasswordModal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative bg-zinc-900 border border-red-600/40 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl my-auto">
+      <button onclick="closeModal('changePasswordModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 text-slate-400 hover:text-white flex items-center justify-center">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-red-600/20 text-red-500 border border-red-600/40 flex items-center justify-center mx-auto mb-3">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-serif-title font-bold text-white">Ubah Password Akun</h3>
+        <p id="changePassUserLabel" class="text-xs text-red-400 font-semibold mt-1">Akun: -</p>
+      </div>
+
+      <form id="changePasswordForm" onsubmit="handleChangePassword(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Password Lama *</label>
+          <input type="password" id="cpOldPassword" required placeholder="Masukkan password lama saat ini" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Password Baru *</label>
+          <input type="password" id="cpNewPassword" required placeholder="Masukkan password baru Anda" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Konfirmasi Password Baru *</label>
+          <input type="password" id="cpConfirmPassword" required placeholder="Ulangi password baru" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <p id="changePassMsg" class="text-xs font-bold hidden"></p>
+
+        <button type="submit" class="w-full btn-red py-3 rounded-xl text-xs uppercase tracking-wider font-bold shadow-lg">Simpan Password Baru</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="relative bg-zinc-900 border border-red-600/30 rounded-3xl max-w-4xl w-full overflow-hidden shadow-2xl flex flex-col lg:flex-row my-auto max-h-[90vh]">
+      
+      <!-- Close Button -->
+      <button onclick="closeModal('lightboxModal')" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/80 text-white hover:text-red-400 flex items-center justify-center border border-zinc-700">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Left: Media Container (Image or Video) -->
+      <div class="lg:w-3/5 bg-black flex items-center justify-center overflow-hidden min-h-[300px] lg:min-h-[450px]">
+        <img id="lbImage" src="" alt="Detail Kenangan" class="w-full h-full object-contain max-h-[70vh]" />
+        <video id="lbVideo" controls class="hidden w-full h-full object-contain max-h-[70vh]"></video>
+      </div>
+
+      <!-- Right: Content & Comments -->
+      <div class="lg:w-2/5 p-6 flex flex-col justify-between overflow-y-auto">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <span id="lbCategory" class="px-2.5 py-0.5 rounded-full bg-red-600/20 text-red-400 text-[10px] font-semibold uppercase">Category</span>
+            <span id="lbDate" class="text-xs text-slate-400">Date</span>
+          </div>
+
+          <h3 id="lbTitle" class="text-xl font-serif-title font-bold text-white mb-2">Judul Momen</h3>
+          
+          <div class="flex items-center gap-1.5 text-xs text-slate-400 mb-4">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-red-500"></i>
+            <span id="lbLocation">Lokasi</span>
+          </div>
+
+          <p id="lbDescription" class="text-sm text-slate-300 leading-relaxed mb-6">Deskripsi kenangan...</p>
+          
+          <div id="lbTags" class="flex flex-wrap gap-1.5 mb-6">
+            <!-- Tags injected by JS -->
+          </div>
+        </div>
+
+        <div class="border-t border-zinc-800 pt-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <button id="lbLikeBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-rose-500/20 text-rose-400 border border-zinc-700 text-xs font-semibold transition-all">
+              <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+              <span id="lbLikesCount">0</span>
+            </button>
+            <span class="text-[11px] text-slate-500">Oleh <strong id="lbUploader" class="text-slate-300">Pengunggah</strong></span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button id="lbDeleteBtn" class="hidden p-2 rounded-xl bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-600/40 transition-colors" title="Hapus Momen (Super Admin)">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+            <a id="lbDownloadBtn" href="#" download class="p-2 rounded-xl bg-zinc-800 hover:bg-red-600 text-slate-300 hover:text-white transition-colors" title="Unduh File Media">
+              <i data-lucide="download" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPLOAD MEMORY MODAL WITH CALENDAR DATE PICKER -->
+  <div id="uploadModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative bg-zinc-900 border border-red-600/30 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl my-auto">
+      <button onclick="closeModal('uploadModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 text-slate-400 hover:text-white flex items-center justify-center">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 rounded-xl bg-red-600/20 border border-red-600/40 text-red-500 flex items-center justify-center">
+          <i data-lucide="upload-cloud" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-serif-title font-bold text-white">Unggah Momen Baru</h3>
+          <p class="text-xs text-slate-400">Pilih foto/video dari perangkat & pilih tanggal di kalender</p>
+        </div>
+      </div>
+
+      <form id="uploadForm" onsubmit="handleUploadMemory(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Judul Momen *</label>
+          <input type="text" id="upTitle" required placeholder="Contoh: Momen Sidang Sempro Sakinah" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Kategori *</label>
+            <select id="upCategory" required class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3 py-2.5 text-xs text-white outline-none">
+              <option value="kuliah">Kuliah</option>
+              <option value="kegiatan">Kegiatan</option>
+              <option value="sidang">Sidang</option>
+              <option value="lucu">Lucu</option>
+              <option value="wisuda">Wisuda</option>
+            </select>
+          </div>
+          
+          <!-- CALENDAR DATE PICKER INPUT -->
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Pilih Tanggal (Kalender) *</label>
+            <input type="date" id="upDate" required class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2 text-xs text-white outline-none cursor-pointer [color-scheme:dark]" />
+          </div>
+        </div>
+
+        <!-- FILE UPLOAD INPUT FROM DEVICE STORAGE -->
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Pilih File Foto / Video (dari HP / Perangkat) *</label>
+          <input type="file" id="upFile" accept="image/*,video/*" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3 py-2 text-xs text-white outline-none file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-500 cursor-pointer" />
+          
+          <div class="flex items-center gap-2 my-2">
+            <div class="h-px bg-zinc-800 flex-1"></div>
+            <span class="text-[10px] text-slate-500 uppercase">atau gunakan link URL</span>
+            <div class="h-px bg-zinc-800 flex-1"></div>
+          </div>
+          
+          <input type="url" id="upImage" placeholder="https://images.unsplash.com/... (opsional)" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Lokasi Kejadian</label>
+            <input type="text" id="upLocation" placeholder="Contoh: Pengadilan Agama" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Pengunggah *</label>
+            <input type="text" id="upUploader" required placeholder="Nama kamu" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Cerita / Deskripsi Singkat</label>
+          <textarea id="upDescription" rows="3" placeholder="Ceritakan kisah di balik foto/video ini..." class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none resize-none"></textarea>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" id="upSubmitBtn" class="w-full btn-red py-3 rounded-xl text-xs uppercase tracking-wider font-bold shadow-lg">Simpan Momen Kenangan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD NOTE MODAL -->
+  <div id="noteModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative bg-zinc-900 border border-red-600/30 rounded-3xl max-w-md w-full p-6 shadow-2xl my-auto">
+      <button onclick="closeModal('noteModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 text-slate-400 hover:text-white flex items-center justify-center">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <h3 class="text-xl font-serif-title font-bold text-white mb-4">Tulis Pesan & Kesan</h3>
+      
+      <form id="noteForm" onsubmit="handleAddNote(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Kamu *</label>
+          <input type="text" id="noteAuthor" required placeholder="Nama kamu" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Pilih Warna Notes</label>
+          <div class="flex items-center gap-3">
+            <label class="flex items-center gap-1.5 text-xs text-slate-200 cursor-pointer">
+              <input type="radio" name="noteColor" value="gold" checked class="accent-red-600" /> Putih (Clean)
+            </label>
+            <label class="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
+              <input type="radio" name="noteColor" value="navy" class="accent-red-600" /> Hitam (Obsidian)
+            </label>
+            <label class="flex items-center gap-1.5 text-xs text-rose-300 cursor-pointer">
+              <input type="radio" name="noteColor" value="rose" class="accent-red-600" /> Merah (Crimson)
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Pesan / Kesan / Doa *</label>
+          <textarea id="noteContent" required rows="4" placeholder="Tuliskan ucapan kebersamaan, kesan, dan pesan untuk teman HKI..." class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-600 rounded-xl px-3.5 py-2.5 text-xs text-white outline-none resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full btn-red py-3 rounded-xl text-xs uppercase tracking-wider font-bold">Tempelkan Di Wall</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- QUIZ MODAL -->
+  <div id="quizModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative bg-zinc-900 border border-red-600/30 rounded-3xl max-w-md w-full p-6 shadow-2xl text-center my-auto">
+      <button onclick="closeModal('quizModal')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-800 text-slate-400 hover:text-white flex items-center justify-center">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 border border-red-600/40 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="help-circle" class="w-6 h-6"></i>
+      </div>
+
+      <h3 class="text-xl font-serif-title font-bold text-white mb-2">Quiz Trivia HKI ⚖️</h3>
+      <p id="quizQuestion" class="text-sm text-slate-300 mb-6">Semboyan hukum apakah yang bermakna "Keadilan harus ditegakkan walaupun langit akan runtuh"?</p>
+
+      <div id="quizOptions" class="space-y-2 mb-6">
+        <!-- Injected by JS -->
+      </div>
+
+      <p id="quizResult" class="text-xs font-bold text-red-400 hidden"></p>
+    </div>
+  </div>
+
+  <!-- BGM Audio Element (The 1975 - About You) -->
+  <audio id="bgmAudio" src="about_you.mp3" loop preload="auto" class="hidden"></audio>
+
+  <!-- Application Logic -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
