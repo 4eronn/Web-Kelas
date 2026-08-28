@@ -34,7 +34,7 @@ const INITIAL_DATA = {
 
   // 18 Akun Pengguna Terdaftar (user1 s.d. user18, Password awal: 112233)
   users: [
-    { id: "usr-1", username: "ismail@hki.com", name: "Muhammad Ridwan Ismail", email: "Super Admin", password: "112233", role: "Kosma" },
+    { id: "usr-1", username: "ismail@hki.com", name: "Muhammad Ridwan Ismail", email: "Kosma", password: "112233", role: "Super Admin" },
     { id: "usr-2", username: "aceng@hki.com", name: "Aceng Usman", email: "user2@hki.com", password: "112233", role: "Anggota" },
     { id: "usr-3", username: "kibo@hki.com", name: "Ade Ahmad Satibi", email: "user3@hki.com", password: "112233", role: "Anggota" },
     { id: "usr-4", username: "agus@hki.com", name: "Agus Setiyawan", email: "user4@hki.com", password: "112233", role: "Anggota" },
