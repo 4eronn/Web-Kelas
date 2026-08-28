@@ -34,24 +34,23 @@ const INITIAL_DATA = {
 
   // 18 Akun Pengguna Terdaftar (username = kata pertama nama, Password awal: 112233)
   users: [
-    { id: "usr-1", username: "muhammad", name: "Muhammad Ridwan Ismail", email: "muhammad@hki.id", password: "112233", role: "Super Admin" },
+    { id: "usr-1", username: "muhammad", name: "Muhammad Ridwan Ismail", email: "mail@hki.id", password: "112233", role: "Super Admin" },
     { id: "usr-2", username: "aceng", name: "Aceng Usman", email: "aceng@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-3", username: "ade", name: "Ade Ahmad Satibi", email: "ade@hki.id", password: "112233", role: "Anggota" },
+    { id: "usr-3", username: "ade", name: "Ade Ahmad Satibi", email: "kibo@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-4", username: "agus", name: "Agus Setiyawan", email: "agus@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-5", username: "ajzi", name: "Ajzi Manumayasya", email: "ajzi@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-6", username: "alif", name: "Alif Subbanul Qirom", email: "alif@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-7", username: "eka", name: "Eka Wulandari", email: "eka@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-8", username: "hasan", name: "Hasan Basri", email: "hasan@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-9", username: "muhammad2", name: "Muhammad Abdurachman", email: "muhammad2@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-10", username: "muhammad3", name: "Muhammad Ridwan", email: "muhammad3@hki.id", password: "112233", role: "Anggota" },
+    { id: "usr-9", username: "muhammad2", name: "Muhammad Abdurachman", email: "abai@hki.id", password: "112233", role: "Anggota" },
+    { id: "usr-10", username: "muhammad3", name: "Muhammad Ridwan", email: "ridwan@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-11", username: "nurul", name: "Nurul Zakiah Hidayat", email: "nurul@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-12", username: "rivaldi", name: "Rivaldi Bagja", email: "rivaldi@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-13", username: "sidqia", name: "Sidqia Rizky Awaliyah", email: "sidqia@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-14", username: "siti", name: "Siti Ainur Rahmah", email: "siti@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-15", username: "siti2", name: "Siti Nurasyfa", email: "siti2@hki.id", password: "112233", role: "Anggota" },
+    { id: "usr-13", username: "sidqia", name: "Sidqia Rizky Awaliyah", email: "qia@hki.id", password: "112233", role: "Anggota" },
+    { id: "usr-14", username: "siti", name: "Siti Ainur Rahmah", email: "ama@hki.id", password: "112233", role: "Anggota" },
+    { id: "usr-15", username: "siti2", name: "Siti Nurasyfa", email: "cipa@hki.id", password: "112233", role: "Anggota" },
     { id: "usr-16", username: "syahrul", name: "Syahrul Amarullah", email: "syahrul@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-17", username: "syarif", name: "Syarif Hidayat", email: "syarif@hki.id", password: "112233", role: "Anggota" },
-    { id: "usr-18", username: "anggota", name: "Anggota HKI 2022", email: "anggota@hki.id", password: "112233", role: "Anggota" }
+    { id: "usr-17", username: "syarif", name: "Syarif Hidayat", email: "syarif@hki.id", password: "112233", role: "Anggota" }
   ],
 
   // Kategori: Kuliah, Kegiatan, Sidang, Lucu, Wisuda
@@ -175,8 +174,8 @@ const INITIAL_DATA = {
     {
       id: "stu-1",
       name: "Muhammad Ridwan Ismail",
-      role: "Ketua Kelas / Super Admin",
-      badge: "Super Admin",
+      role: "Kosma",
+      badge: "Kosma",
       avatar: "assets/Muhammad Ridwan Ismail.png",
       quote: "Fiat Justitia Ruat Caelum — Menegakkan keadilan, mengukir kebersamaan HKI."
     },
