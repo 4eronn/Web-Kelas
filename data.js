@@ -34,24 +34,23 @@ const INITIAL_DATA = {
 
   // 18 Akun Pengguna Terdaftar (user1 s.d. user18, Password awal: 112233)
   users: [
-    { id: "usr-1", username: "user1", name: "Muhammad Ridwan Ismail", email: "user1@hki.com", password: "112233", role: "Super Admin" },
-    { id: "usr-2", username: "user2", name: "Aceng Usman", email: "user2@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-3", username: "user3", name: "Ade Ahmad Satibi", email: "user3@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-4", username: "user4", name: "Agus Setiyawan", email: "user4@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-5", username: "user5", name: "Ajzi Manumayasya", email: "user5@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-6", username: "user6", name: "Alif Subbanul Qirom", email: "user6@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-7", username: "user7", name: "Eka Wulandari", email: "user7@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-8", username: "user8", name: "Hasan Basri", email: "user8@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-9", username: "user9", name: "Muhammad Abdurachman", email: "user9@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-10", username: "user10", name: "Muhammad Ridwan", email: "user10@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-11", username: "user11", name: "Nurul Zakiah Hidayat", email: "user11@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-12", username: "user12", name: "Rivaldi Bagja", email: "user12@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-13", username: "user13", name: "Sidqia Rizky Awaliyah", email: "user13@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-14", username: "user14", name: "Siti Ainur Rahmah", email: "user14@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-15", username: "user15", name: "Siti Nurasyfa", email: "user15@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-16", username: "user16", name: "Syahrul Amarullah", email: "user16@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-17", username: "user17", name: "Syarif Hidayat", email: "user17@hki.com", password: "112233", role: "Anggota" },
-    { id: "usr-18", username: "user18", name: "Anggota HKI 2022", email: "user18@hki.com", password: "112233", role: "Anggota" }
+    { id: "usr-1", username: "ismial@hki.com", name: "Muhammad Ridwan Ismail", email: "Super Admin", password: "112233", role: "Kosma" },
+    { id: "usr-2", username: "aceng@hki.com", name: "Aceng Usman", email: "user2@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-3", username: "kibo@hki.com", name: "Ade Ahmad Satibi", email: "user3@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-4", username: "agus@hki.com", name: "Agus Setiyawan", email: "user4@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-5", username: "ajzi@hki.com", name: "Ajzi Manumayasya", email: "user5@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-6", username: "alif@hki.com", name: "Alif Subbanul Qirom", email: "user6@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-7", username: "eka@hki.com", name: "Eka Wulandari", email: "user7@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-8", username: "Hasan@hki.com", name: "Hasan Basri", email: "user8@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-9", username: "Abai@hki.com", name: "Muhammad Abdurachman", email: "user9@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-10", username: "ridwan@hki.com", name: "Muhammad Ridwan", email: "user10@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-11", username: "nurul@hki.com", name: "Nurul Zakiah Hidayat", email: "user11@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-12", username: "rivaldi@hki.com", name: "Rivaldi Bagja", email: "user12@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-13", username: "qia@hki.com", name: "Sidqia Rizky Awaliyah", email: "user13@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-14", username: "ama@hki.com", name: "Siti Ainur Rahmah", email: "user14@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-15", username: "cipa@hki.com", name: "Siti Nurasyfa", email: "user15@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-16", username: "syahrul@hki.com", name: "Syahrul Amarullah", email: "user16@hki.com", password: "112233", role: "Anggota" },
+    { id: "usr-17", username: "syarif@hki.com", name: "Syarif Hidayat", email: "user17@hki.com", password: "112233", role: "Anggota" }
   ],
 
   // Kategori: Kuliah, Kegiatan, Sidang, Lucu, Wisuda
@@ -170,17 +169,6 @@ const INITIAL_DATA = {
       uploader: "Nurul Zakiah Hidayat"
     }
   ],
-
-  members: [
-    {
-      id: "dos-1",
-      name: "Dr. Hendra Wijaya, S.H.I., M.H.",
-      role: "Dosen Pembimbing Akademik",
-      badge: "Dosen PA",
-      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",
-      quote: "Hukum bukan sekadar hafalan pasal, tapi tentang menegakkan rasa keadilan bagi masyarakat."
-    },
-    {
       id: "stu-1",
       name: "Muhammad Ridwan Ismail",
       role: "Ketua Kelas / Super Admin",
@@ -350,26 +338,6 @@ const INITIAL_DATA = {
   ],
 
   notes: [
-    {
-      id: "note-1",
-      author: "User 5",
-      color: "gold",
-      date: "25 Feb 2025",
-      content: "Makasih banyak gaes buat 4 tahun yang penuh tawa! Jangan pernah lupain momen tegang pas ditunjuk Dosen PA ya! Sukses buat kita calon Lawyer & Praktisi Hukum Hebat! ⚖️✨"
-    },
-    {
-      id: "note-2",
-      author: "User 6",
-      color: "navy",
-      date: "26 Feb 2025",
-      content: "Terima kasih buat teman-teman yang selalu sedia berbagi catatan Faraidh & KHI pas H-1 ujian. Kalian sahabat sejati!"
-    },
-    {
-      id: "note-3",
-      author: "User 3 (Bendahara)",
-      color: "rose",
-      date: "27 Feb 2025",
-      content: "Pemberitahuan resmi: Walaupun sudah lulus, persahabatan HKI tidak akan kadaluwarsa menurut hukum perjanjian wkwk 😜 Kangen kalian semua!"
-    }
+ }
   ]
 };
